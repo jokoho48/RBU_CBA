@@ -1,1 +1,1 @@
-#include "\{{MANPREFIX}}\{{PREFIX}}\addons\other\script_component.hpp"
+#include "\{{MAINPREFIX}}\{{PREFIX}}\addons\other\script_component.hpp"
