@@ -1,4 +1,4 @@
-#define MAINPREFIX z
+#define MAINPREFIX {{MAINPREFIX}}
 #define PREFIX {{PREFIX}}
 
 #include "script_version.hpp"

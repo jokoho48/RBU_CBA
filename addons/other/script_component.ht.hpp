@@ -1,5 +1,5 @@
-#define COMPONENT other
-#include "\z\{{PREFIX}}\addons\main\script_mod.hpp"
+#define COMPONENT %%ADDON%%
+#include "\{{MANPREFIX}}\{{PREFIX}}\addons\main\script_mod.hpp"
 
 // #define DEBUG_MODE_FULL
 // #define DISABLE_COMPILE_CACHE
@@ -11,4 +11,4 @@
     #define DEBUG_SETTINGS DEBUG_SETTINGS_%%ADDON%%
 #endif
 
-#include "\z\{{PREFIX}}\addons\main\script_macros.hpp"
+#include "\{{MANPREFIX}}\{{PREFIX}}\addons\main\script_macros.hpp"
