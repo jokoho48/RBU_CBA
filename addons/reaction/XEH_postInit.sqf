@@ -2,7 +2,6 @@
 
 [QGVAR(sendAI), {
     params ["_group", "_pos"];
-    diag_log _this;
     [_group, [_pos, GVAR(searchRad), GVAR(searchRad), 0, false], GVAR(aiMode), "AWARE", "FULL"] call CBA_fnc_taskSearchArea;
 }] call CBA_fnc_addEventHandler;
 

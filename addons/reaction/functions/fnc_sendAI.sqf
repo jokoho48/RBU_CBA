@@ -19,10 +19,8 @@
 */
 
 params ["_group", "_position", "_targetedUnits"];
-diag_log "SendAI";
 // Send now the AI!
 [{
-    diag_log "Target Event Send AI";
     [QGVAR(sendAI), _this, _this select 0] call CBA_fnc_targetEvent;
 }, [_group, _position], 1] call CBA_fnc_waitAndExecute;
 
