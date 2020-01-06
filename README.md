@@ -10,4 +10,4 @@ Joko // Jonas,
 
 --
 
-RBU - Runs by Us is licensed under the GNU General Public License ([GPLv2](https://github.com/nk3nny/LambsDanger/blob/master/LICENSE)) with two amendments listed in the documentation.
+RBU - Runs by Us is licensed under the GNU General Public License ([GPLv2](https://github.com/jokoho48/RBU_CBA/blob/master/LICENSE)) with two amendments listed in the documentation.
