@@ -12,5 +12,27 @@ class CfgPatches {
     };
 };
 
-
 #include "CfgEventHandlers.hpp"
+
+class Cfg3DEN {
+    class Group {
+        class AttributeCategories {
+            class GVAR(attributes) {
+                collapsed = 1;
+                displayName = "Runs By Us";
+                class Attributes {
+                    class GVAR(Editor_Reaction_Allowed) {
+                        property = QGVAR(Editor_Reaction_Allowed);
+                        control = "Checkbox";
+                        displayName = "Allow Reaction";
+                        tooltip = "if this Checkbox is Active the unit is allowed to reat to Shots Fired.";
+                        expression = "if (_value) then {_this setVariable ['rbu_reaction_allowed', _value, true]};";
+                        typeName = "BOOL";
+                        condition = "objectVehicle";
+                        defaultValue = "(true)";
+                    };
+                };
+            };
+        };
+    };
+};
