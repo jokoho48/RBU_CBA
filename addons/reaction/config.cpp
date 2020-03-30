@@ -26,7 +26,7 @@ class Cfg3DEN {
                         control = "Checkbox";
                         displayName = "Allow Reaction";
                         tooltip = "if this Checkbox is Active the unit is allowed to reat to Shots Fired.";
-                        expression = "if (_value) then {_this setVariable ['rbu_reaction_allowed', _value, true]};";
+                        expression = "_this setVariable ['rbu_reaction_allowed', _value, true];";
                         typeName = "BOOL";
                         condition = "objectVehicle";
                         defaultValue = "(true)";
