@@ -32,10 +32,7 @@ jobs:
         uses: arma-actions/hemtt@master
         with:
           command: 'build --release'
-      - run: |
-          cp -r 'releases/2.0.0/@rbu' '@RBU'
-          zip -r @RBU.zip @RBU/
       - uses: actions/upload-artifact@master
         with:
           name: '@RBU'
-          path: '@RBU'
+          path: 'releases/@RBU.zip'
