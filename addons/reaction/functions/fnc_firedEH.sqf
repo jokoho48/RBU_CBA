@@ -5,70 +5,72 @@
     Author: joko // Jonas
 
     Description:
-    Fired EH that Do stuff
-
+    FiredMan EH that Triggers Dispatching of AI Groups
 
     Remarks:
     Only Execute On the Server
 
     Parameter(s):
-    0: Argument <Type>
+    FiredMan EH Arguments:
+    https://community.bistudio.com/wiki/Arma_3:_Event_Handlers#FiredMan
 
     Returns:
-    0: Return <Type>
+    NONE
 */
-if !(isServer) exitWith {};
-if (GVAR(areRunning) == GVAR(areRunningMax)) exitWith {};
+if (count GVAR(trackedGroups) == GVAR(maxDispatchedGroups)) exitWith {};
+
 //Get all needed vars
 params ["_unit", "_weapon", "_muzzle", "", "", "", "", ""];
 
 if (toLower(_weapon) in ["put", "take"]) exitWith {};
 if (_unit getVariable [QGVAR(isTargeted), false]) exitWith {};
 
-private _hearingCoef = [_unit, _weapon, _muzzle] call FUNC(checkWeapon);
+private _area = "";
+private _notInArea = false;
+if !(GVAR(trackedAreas) isEqualTo []) then {
+    _notInArea = true;
+    scopeName "AreaTracking";
+    {
+        if (_unit inArea _x) then {
+            _notInArea = false;
+            _area = _x;
+            breakOut "AreaTracking";
+        };
+    } forEach GVAR(trackedAreas);
+};
+if (_notInArea) exitWith {};
+
+private _hearingCoef = [_unit, _weapon, _muzzle] call FUNC(getHearingCoef);
 private _hearing = (GVAR(hearing) * _hearingCoef);
 
-private _posUnit = getPos _unit;
+private _targetPos = getPos _unit;
 
 private _groups = [];
 
 //Loop to allGroups and select the nearest one
+private _side = side _unit;
 {
-    if (
-        !isNull _x &&
-        {{alive _x} count (units _x) != 0} &&
-        {!(_x getVariable [QGVAR(areRunning), false])} &&
-        {!(_x getVariable [QGVAR(haveRunner), false])} &&
-        {_x getVariable [QGVAR(allowed), true]} &&
-        {isNull ((leader _x) findNearestEnemy (leader _x))}
-    ) then {
-        if ({isPlayer _x} count (units _x) != 0) exitWith {};
-        private _leader = leader _x;
-
+    if ([_x, _side, _area] call FUNC(canDispatch)) then {
         //Check now if they can hear the shoot
-        private _result = _posUnit distance (getPos _leader);
+        private _result = _targetPos distance (getPos _leader);
         if (_result < _hearing) then {
-
             //Check if we can use this group
-            if ([side _unit, side _leader] call BIS_fnc_sideIsEnemy) then {
-                _groups pushBack [_result, _x];
-            };
+            _groups pushBack [_result, _x];
         };
     };
-    nil
-} count allGroups;
+} forEach allGroups;
 
 _groups sort true;
-
+_groups = _groups apply {_x select 1};
 if !(_groups isEqualTo []) then {
     private _playerClose = [_unit];
     {
-        if ((_x distance _posUnit) < 100) then {
+        if ((_x distance _targetPos) < 25) then {
             _playerClose pushback _x;
             _x setVariable [QGVAR(isTargeted), true, true];
         };
         nil
     } count allPlayers;
-    private _group = _groups call FUNC(checkGroup);
-    [_group, (getPos _unit), _playerClose] call FUNC(sendAI);
+    private _group = (_groups select 0) call FUNC(generateGroup);
+    [_group, (getPos _unit), _playerClose] call FUNC(dispatchAI);
 };

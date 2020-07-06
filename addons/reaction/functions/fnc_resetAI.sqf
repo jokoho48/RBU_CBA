@@ -17,12 +17,12 @@
     Returns:
     0: Return <Type>
 */
-params["_group", "_targetedUnits"];
+params["_group", "_targets"];
 
 private _units = units _group;
 
 private _oldGroup = _group getVariable [QGVAR(oldGroup), grpNull];
-_oldGroup setVariable [QGVAR(haveRunner), false, true];
+_oldGroup setVariable [QGVAR(groupHasDispatch), false, true];
 //Create a new group
 if (isNull _oldGroup || {{alive _x} count (units _oldGroup) == 0}) then {
     // Send AI back
@@ -37,9 +37,12 @@ if (isNull _oldGroup || {{alive _x} count (units _oldGroup) == 0}) then {
     _units joinSilent _oldGroup; // reattach Group to Original Group
 };
 
-GVAR(areRunning) = GVAR(areRunning) - 1;
+private _index = GVAR(trackedGroups) find _group;
+if (_index != -1) then {
+    GVAR(trackedGroups) deleteAt _index;
+};
 
 {
     _x setVariable [QGVAR(isTargeted), false, true];
     nil
-} count _targetedUnits;
+} count _targets;
