@@ -1,7 +1,7 @@
 name = "Runs By Us"
 prefix = "rbu"
 author = "joko // Jonas"
-sigversion = 3
+sig_version = 3
 version = "1.1.0" # NB: this is not the real version number. We use git tags.
 reuse_private_key = false
 files = [
