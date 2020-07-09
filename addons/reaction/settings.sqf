@@ -2,9 +2,17 @@ private _curCat = "Settings";
 [
     QGVAR(enabled),
     "CHECKBOX",
-    ["Enable", "Enabled the RBU System"],
+    ["Enable", "Enables the RBU System"],
     [COMPONENT_NAME, _curCat],
     true,
+    true
+] call CBA_fnc_addSetting;
+[
+    QGVAR(enableForAI),
+    "CHECKBOX",
+    ["Enable For AI", "Enables for AI Firing Weapons and not just players"],
+    [COMPONENT_NAME, _curCat],
+    false,
     true
 ] call CBA_fnc_addSetting;
 [
@@ -68,5 +76,14 @@ private _curCat = "Settings";
     ["Maximum Dispatched Groups", "The Maximum Amount of Dispachted Groups that go Investigate."],
     [COMPONENT_NAME, _curCat],
     [2, 10, 3, 0],
+    true
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(debug),
+    "CHECKBOX",
+    ["Enable Debug", "Enables Debug Logs and Markers"],
+    [COMPONENT_NAME, _curCat],
+    false,
     true
 ] call CBA_fnc_addSetting;

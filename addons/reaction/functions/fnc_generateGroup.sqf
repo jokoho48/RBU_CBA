@@ -34,7 +34,18 @@ if (_groupSize > GVAR(numberOfAi)) exitWith {
     _groupNew setVariable [QGVAR(oldGroup), _group];
     _groupNew setVariable [QGVAR(oldPosition), getPos (leader _group)];
     _groupNew deleteGroupWhenEmpty true;
+    if (GVAR(debug)) then {
+        private _str = format ["[RBU] %1: Generate New Sub Group %2 for Dispatchment %3", side _group, _group, _groupNew];
+        systemChat _str;
+        diag_log _str;
+    };
+
     _groupNew
+};
+if (GVAR(debug)) then {
+    private _str = format ["[RBU] %1: Use Full Group %2 for Dispatchment", side _group, _group];
+    systemChat _str;
+    diag_log _str;
 };
 // if the groups is smaller just return the group and let it be (we dont want to overcomplicate it)
 _group setVariable [QGVAR(oldPosition), getPos (leader _group)];
