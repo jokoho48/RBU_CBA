@@ -50,7 +50,7 @@ private _targetPos = _unit getPos [random 25, random 360];
 private _groups = [];
 
 //Loop to allGroups and select the nearest one
-private _side = side _unit;
+private _side = side (group _unit);
 {
     if ([_x, _side, _area] call FUNC(canDispatch)) then {
         //Check now if they can hear the shoot

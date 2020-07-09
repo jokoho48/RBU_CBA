@@ -23,5 +23,5 @@ if (isServer) then {
             };
         } forEach GVAR(trackedGroups);
         GVAR(trackedGroups) = GVAR(trackedGroups) - [grpNull];
-    }, 10] call CBA_fnc_addPerFrameHandler;
+    }, 2] call CBA_fnc_addPerFrameHandler;
 };

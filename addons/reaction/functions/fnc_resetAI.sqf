@@ -19,10 +19,21 @@
 */
 params["_group", "_targets"];
 
+private _index = GVAR(trackedGroups) find _group;
+if (_index != -1) then {
+    GVAR(trackedGroups) deleteAt _index;
+};
+
+{
+    _x setVariable [QGVAR(isTargeted), false, true];
+    nil
+} count _targets;
+
 private _units = units _group;
 
 private _oldGroup = _group getVariable [QGVAR(oldGroup), grpNull];
 _oldGroup setVariable [QGVAR(groupHasDispatch), false, true];
+if (_units isEqualTo []) exitWith {};
 //Create a new group
 if (isNull _oldGroup || {{alive _x} count (units _oldGroup) == 0}) then {
     // Send AI back
@@ -46,13 +57,3 @@ if (isNull _oldGroup || {{alive _x} count (units _oldGroup) == 0}) then {
         diag_log _str;
     };
 };
-
-private _index = GVAR(trackedGroups) find _group;
-if (_index != -1) then {
-    GVAR(trackedGroups) deleteAt _index;
-};
-
-{
-    _x setVariable [QGVAR(isTargeted), false, true];
-    nil
-} count _targets;
