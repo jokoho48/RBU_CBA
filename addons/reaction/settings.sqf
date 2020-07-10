@@ -1,10 +1,26 @@
 private _curCat = "Settings";
 [
+    QGVAR(enabled),
+    "CHECKBOX",
+    ["Enable", "Enables the RBU System"],
+    [COMPONENT_NAME, _curCat],
+    true,
+    true
+] call CBA_fnc_addSetting;
+[
+    QGVAR(enableForAI),
+    "CHECKBOX",
+    ["Enable For AI", "Enables for AI Firing Weapons and not just players"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    true
+] call CBA_fnc_addSetting;
+[
     QGVAR(hearing),
     "SLIDER",
     ["Hearing Range", "Base Distance on that Units Hear Shots"],
     [COMPONENT_NAME, _curCat],
-    [25, 12000, 1000, 0],
+    [25, 12000, 2000, 0],
     true
 ] call CBA_fnc_addSetting;
 
@@ -35,29 +51,39 @@ private _curCat = "Settings";
     true
 ] call CBA_fnc_addSetting;
 
+#define SEARCH_MODES ["UNCHANGED", "CARELESS", "SAFE", "AWARE", "COMBAT", "STEALTH"]
 [
     QGVAR(aiMode),
     "LIST",
     ["Waypoint Behaviour", "The Behaviour the AI gets set into while Investigating"],
     [COMPONENT_NAME, _curCat],
-    [["UNCHANGED", "CARELESS", "SAFE", "AWARE", "COMBAT", "STEALTH"], ["UNCHANGED", "CARELESS", "SAFE", "AWARE", "COMBAT", "STEALTH"], 4], // TODO: Find Stringtable Entrys
+    [SEARCH_MODES, SEARCH_MODES, 4],
     true
 ] call CBA_fnc_addSetting;
 
 [
-    QGVAR(walkCycles),
+    QGVAR(searchTime),
     "SLIDER",
-    ["WalkCycles", "The Amount of Walk Cycles the Group Does before it returns to the Original Group.(One Walk Cycle is 10 Seconds, that means 300 Walk Cycles are 3000 Seconds)"],
+    ["Search Time", "The Time The AI Searches the Area (in Minutes)"],
     [COMPONENT_NAME, _curCat],
-    [10, 1200, 300, 0],
+    [2, 120, 20, 0],
     true
 ] call CBA_fnc_addSetting;
 
 [
-    QGVAR(areRunningMax),
+    QGVAR(maxDispatchedGroups),
     "SLIDER",
     ["Maximum Dispatched Groups", "The Maximum Amount of Dispachted Groups that go Investigate."],
     [COMPONENT_NAME, _curCat],
     [2, 10, 3, 0],
+    true
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(debug),
+    "CHECKBOX",
+    ["Enable Debug", "Enables Debug Logs and Markers"],
+    [COMPONENT_NAME, _curCat],
+    false,
     true
 ] call CBA_fnc_addSetting;

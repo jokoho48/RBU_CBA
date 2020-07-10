@@ -1,9 +1,10 @@
 *.biprivatekey
 
+.hemtt/local
 hemtt\.exe
 armake2\.exe
-keys/
-releases/
+keys/*
+releases/*
 *.pbo
 
 *.bisign

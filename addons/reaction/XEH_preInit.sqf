@@ -3,7 +3,8 @@ ADDON = false;
 
 #include "XEH_PREP.hpp"
 
-GVAR(areRunning) = 0;
+GVAR(trackedGroups) = [];
+GVAR(trackedAreas) = [];
 
 #include "settings.sqf"
 
