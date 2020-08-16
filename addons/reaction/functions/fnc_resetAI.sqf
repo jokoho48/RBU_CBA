@@ -40,15 +40,18 @@ if (isNull _oldGroup || {{alive _x} count (units _oldGroup) == 0}) then {
     // Later task send them back on there original track
     private _position = _group getVariable [QGVAR(oldPosition), getPos (leader _group)];
 
+    // Delete Current Serach Waypoint
+    _group call CBA_fnc_clearWaypoints;
+
     [{
         [QGVAR(resetAI), _this, _this select 0] call CBA_fnc_targetEvent;
     }, [_group, _position], 1] call CBA_fnc_waitAndExecute;
+
     if (GVAR(debug)) then {
         private _str = format ["[RBU] %1: Reset Group %2 to Old Group Missing Create New Task", side _group, _group];
         systemChat _str;
         diag_log _str;
     };
-
 } else {
     _units joinSilent _oldGroup; // reattach Group to Original Group
     if (GVAR(debug)) then {

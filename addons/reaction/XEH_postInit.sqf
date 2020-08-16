@@ -9,6 +9,7 @@
     params ["_group", "_pos"];
     [_group, _pos, GVAR(searchRad), GVAR(waypointCount), "MOVE", "AWARE", "", GVAR(aiMode)] call CBA_fnc_taskPatrol;
 }] call CBA_fnc_addEventHandler;
+
 if (isServer) then {
     ["CAManBase", "FiredMan", { _this call FUNC(firedEH) }] call CBA_fnc_addClassEventHandler;
     [{

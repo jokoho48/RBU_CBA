@@ -105,7 +105,6 @@ class Cfg3DEN {
                         tooltip = "if this Checkbox is Active the unit is allowed to reat to Shots Fired.";
                         expression = "_this setVariable ['rbu_reaction_allowed', _value, true];";
                         typeName = "BOOL";
-                        condition = "objectVehicle";
                         defaultValue = "(true)";
                     };
                 };
