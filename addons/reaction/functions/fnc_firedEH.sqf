@@ -23,7 +23,7 @@ params ["_unit", "_weapon", "_muzzle", "", "", "", "", ""];
 if !(GVAR(enableForAI) || isPlayer _unit) exitWith {};
 if (count GVAR(trackedGroups) == GVAR(maxDispatchedGroups)) exitWith {};
 
-
+if ((vehicle _unit) isKindOf "Air") exitWith {};
 if (toLower(_weapon) in ["put", "take"]) exitWith {};
 if (_unit getVariable [QGVAR(isTargeted), false]) exitWith {};
 
